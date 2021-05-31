@@ -16,8 +16,8 @@ public class Main {
             System.out.println("------------------------------");
             System.out.println(" 1. Create a new message");
             System.out.println(" 2. Get all messages");
-            System.out.println(" 3. Edit a message");
-            System.out.println(" 4. Delete a message");
+            System.out.println(" 3. Delete a message");
+            System.out.println(" 4. Edit a message");
             System.out.println(" 5. Exit");
             System.out.println("------------------------------");
             System.out.print("-> ");
@@ -31,10 +31,10 @@ public class Main {
                     MessageService.getMessages();
                     break;
                 case 3:
-                    MessageService.updateMessage();
+                    MessageService.deleteMessage();
                     break;
                 case 4:
-                    MessageService.deleteMessage();
+                    MessageService.updateMessage();
                     break;
                 default:
                     System.out.println("Please insert a valid option\n");

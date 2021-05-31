@@ -29,8 +29,28 @@ public class MessageService {
     }
 
     public static void deleteMessage() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nType the message id to delete here");
+        System.out.print("-> ");
+        int id = sc.nextInt();
+        MessageDAO.deleteMessage(id);
     }
 
     public static void updateMessage() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nType the message to update here");
+        System.out.print("-> ");
+        String message = sc.nextLine();
+
+        System.out.println("Type the message id to update here");
+        System.out.print("-> ");
+        int id = sc.nextInt();
+
+
+
+        Message updateMessage = new Message();
+        updateMessage.setMessage_id(id);
+        updateMessage.setMessage(message);
+        MessageDAO.updateMessage(updateMessage);
     }
 }

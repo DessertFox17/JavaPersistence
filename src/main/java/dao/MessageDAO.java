@@ -16,6 +16,7 @@ public class MessageDAO {
 
         try (Connection connection = cnx.getConnection()) {
             PreparedStatement ps = null;
+
             try {
                 String query = "INSERT INTO messanger_app.messages (message, m_author,m_date) VALUES (?,?,?)";
                 ps = connection.prepareStatement(query);
@@ -37,6 +38,7 @@ public class MessageDAO {
         DBConnection cnx = new DBConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
+
         try (Connection connection = cnx.getConnection()) {
             String query = "SELECT * FROM messanger_app.messages";
             ps = connection.prepareStatement(query);
@@ -48,16 +50,54 @@ public class MessageDAO {
                 System.out.println(String.format("Author: %s",rs.getString("m_author")));
                 System.out.println(String.format("Date: %s",rs.getString("m_date")));
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public static void deleteMessage(int id) {
+        DBConnection cnx = new DBConnection();
+
+        try (Connection connection = cnx.getConnection()) {
+            PreparedStatement ps = null;
+
+            try {
+                String query="DELETE FROM messanger_app.messages WHERE message_id = ?";
+                ps=connection.prepareStatement(query);
+                ps.setInt(1, id);
+                ps.executeUpdate();
+                System.out.println("\nMessage deleted successfully");
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void updateMessage(Message message) {
+        DBConnection cnx = new DBConnection();
+
+        try (Connection connection = cnx.getConnection()) {
+            PreparedStatement ps = null;
+
+            try {
+                String query="UPDATE messanger_app.messages SET message = ? WHERE message_id = ?";
+                ps=connection.prepareStatement(query);
+                ps.setString(1, message.getMessage());
+                ps.setInt(2, message.getMessage_id());
+                ps.executeUpdate();
+                System.out.println("\nMessage updated successfully");
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 
